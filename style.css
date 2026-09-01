@@ -999,24 +999,80 @@ html, body {
   border: 1.5px solid #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   display: inline-block;
+}/* Barra con línea tricolor en la parte superior */
+.top-bar {
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #FFCC00 33%, #00247D 33% 66%, #CF142B 66%) 1;
 }/* ==========================================================================
-   Efecto Bandera de Venezuela Completa y Estilizada en el Hero
+   EFECTO PARTICULAS DE LUZ Y RESPLANDOR INTERACTIVO (HERO PREMIUM)
    ========================================================================== */
+
+/* 1. Fondo elegante con profundidad */
 .hero {
   position: relative;
-  /* Capa blanca suave + Bandera centrada y ajustada de tamaño */
-  background-image: 
-    linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 240, 245, 0.88) 100%),
-    url('https://upload.wikimedia.org/wikipedia/commons/0/06/Flag_of_Venezuela.svg') !important;
-  background-position: center center !important;
-  background-size: 80% auto !important; /* Ajusta la escala para que se vean las 3 franjas completas */
-  background-repeat: no-repeat !important;
   overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #ffffff 0%, #fff0f5 70%, #ffe4ec 100%) !important;
 }
 
-/* Para pantallas de celulares ajustamos la escala de la bandera */
+/* 2. Partículas de Luz Flotantes (Creadas mediante sombras múltiples) */
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(216, 58, 128, 0.6);
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 
+    10vw 20vh 8px rgba(255, 204, 0, 0.7),
+    30vw 50vh 12px rgba(216, 58, 128, 0.5),
+    70vw 15vh 6px rgba(255, 141, 161, 0.8),
+    85vw 60vh 10px rgba(255, 204, 0, 0.6),
+    20vw 80vh 14px rgba(216, 58, 128, 0.4),
+    60vw 75vh 8px rgba(255, 141, 161, 0.7);
+  animation: floatParticles 12s linear infinite;
+}
+
+/* 3. Halo neón pastel brillante en el logo */
+.hero-logo-img {
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.5s ease;
+  filter: drop-shadow(0 0 15px rgba(216, 58, 128, 0.25));
+}
+
+.hero-logo-img:hover {
+  transform: scale(1.08) translateY(-4px);
+  filter: drop-shadow(0 0 25px rgba(216, 58, 128, 0.55)) drop-shadow(0 0 45px rgba(255, 204, 0, 0.3));
+}
+
+/* 4. Animación de las partículas flotando hacia arriba */
+@keyframes floatParticles {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-80px) scale(1.2);
+    opacity: 0.2;
+  }
+}
+
+/* Asegurar que el texto esté por encima */
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ajustes responsivos para celulares */
 @media (max-width: 768px) {
-  .hero {
-    background-size: 95% auto !important; /* Se expande un poco más en teléfonos */
+  .hero::before {
+    box-shadow: 
+      15vw 15vh 6px rgba(255, 204, 0, 0.6),
+      75vw 25vh 8px rgba(216, 58, 128, 0.5),
+      25vw 65vh 10px rgba(255, 141, 161, 0.7),
+      80vw 70vh 6px rgba(255, 204, 0, 0.5);
   }
 }
